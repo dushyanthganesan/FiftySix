@@ -1,0 +1,24 @@
+{
+  "name": "fiftysix",
+  "version": "1.0.0",
+  "description": "Fifty Six card game in the browser",
+  "main": "sketch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "JavaScript",
+    "Node",
+    "Socket.io",
+    "Express",
+    "Cards",
+    "56"
+  ],
+  "author": "Dushyanth Ganesan",
+  "license": "MIT",
+  "dependencies": {
+    "expess": "0.0.1-security",
+    "socket.io": "^4.0.1"
+  }
+}
