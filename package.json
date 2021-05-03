@@ -18,7 +18,16 @@
   "author": "Dushyanth Ganesan",
   "license": "MIT",
   "dependencies": {
-    "expess": "0.0.1-security",
+    "express": "^4.17.1",
     "socket.io": "^4.0.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dushyanthganesan/FiftySix.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dushyanthganesan/FiftySix/issues"
+  },
+  "homepage": "https://github.com/dushyanthganesan/FiftySix#readme"
 }
