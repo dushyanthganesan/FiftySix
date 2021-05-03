@@ -13,7 +13,6 @@ function setup() {
 	w = windowWidth;
   h = windowHeight;
 	createCanvas(w, h);
-	elem = document.getElementById("defaultCanvas0");
 }	
 
 function draw() {
@@ -24,6 +23,3 @@ function draw() {
 
 }
 
-function mousePressed() {
- openFullscreen(elem);
-}
