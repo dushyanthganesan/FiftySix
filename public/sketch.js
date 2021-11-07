@@ -6,8 +6,8 @@ let col;
 
 function preload() {
   titleFont = loadFont('resources/fonts/AlfaSlabOne-Regular.ttf');
-  cardbackImgs[0] = loadImage('resources/pictures/cardback-blue.png');
-  cardbackImgs[1] = loadImage('resources/pictures/cardback-red.png');
+  cardbackImgs[0] = loadImage('resources/images/cardback-blue.png');
+  cardbackImgs[1] = loadImage('resources/images/cardback-red.png');
 }
 
 function setup() {
@@ -47,8 +47,7 @@ function draw() {
 
   // cards
   for (let i = 0; i < cards.length; i++) {
-    cards[i].move();
-    cards[i].show();
+    cards[i].update();
   }
 
   // Fifty Six text

@@ -23,4 +23,9 @@ class Cardback {
   show() {
     image(this.card, this.x, this.y, this.w, this.h)
   }
+
+  update() {
+    this.move();
+    this.show();
+  }
 }
