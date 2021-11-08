@@ -12,6 +12,8 @@ let cardbackImgs = [];
 let nameInput; // name input dom
 let nameSubmit; // name submit button
 let player;
+let nameCard;
+let opacity = [200, 1];
 
 
 //////////////
@@ -53,7 +55,12 @@ function setup() {
     // update stage in state machine
     .on("stage", (data) => {
       stage = data;
-    });
+    })
+
+    // if restart is called
+    .on("restart", (data) => {
+			stage = data;
+		});
 
   player = new Player(" ");
   // name input
@@ -69,12 +76,21 @@ function setup() {
 ///////////////////
 function draw() {
   background(0);
+  if (nameCard) {
+    rectMode(CENTER);
+    c = color(player.color)
+    fill(color(c));
+    rect(w/2, 45, w, 120);
+    textSize(45);
+    fill(color(255, 255, 255, 210));
+    text(player.name, w/2, 70);
+  }
 
   switch (stage) {
     // Main stages
 
     case "name":  
-    // name inputting stage //
+      // name inputting stage //
       // render cardbacks
       cardbackOffet = 60;
       image(cardbackImgs[0], cardbackOffet, cardbackOffet);
@@ -92,19 +108,11 @@ function draw() {
       // enter name text
       textSize(45);
       text("Enter your name:", w/2, h/2 - 120);
-
+      break;
     // end stage: name
 
-    case "waitingForHost":  // joined the game, now waiting for host and other players
+    case "waiting for players":  // joined the game, now waiting for host and other players
       // render cardbacks
-      rectMode(CENTER);
-      c = color(player.color)
-      fill(color(c));
-      rect(w/2, 45, w, 120);
-      textSize(45);
-      fill(color(255, 255, 255, 210));
-      text(player.name, w/2, 70);
-
       if (showCards) {
         image(cardbackImgs[0], cardbackOffet, cardbackOffet);
         image(cardbackImgs[1], w-cardbackOffet, cardbackOffet);
@@ -115,6 +123,7 @@ function draw() {
         if (cardbackOffet > -500) {
           cardbackOffet -= 6;
         } else {
+          nameCard = true;
           showCards = false;
         }
       }
@@ -126,6 +135,22 @@ function draw() {
       fill(color(255));
       text('Fifty Six', w/2, h/3);
 
+      // waiting test
+      textSize(40);
+      if (opacity[0] >= 220) {
+        opacity[1] *= -1;
+      } else if (opacity[0] <= 60){
+        opacity[1] *= -1;
+      }
+      opacity[0] += opacity[1]*3;
+      fill(color(255, 255, 255, opacity[0]));
+      text("waiting for players...", w/2, h/2);
+      break;
+
+
+    case "restart":
+      location.reload();
+      break;
   }
 }
 
@@ -144,7 +169,9 @@ function nameInputDom(show) {
       .id('nameInput')
       .position(w/2 - size/2, h/2-60)
       .size(size)
-      .attribute('autocomplete', 'off');
+      .attribute('autocomplete', 'off')
+      .attribute('maxLength', 12);
+
 
     nameSubmit = createButton("submit");
     nameSubmit
@@ -161,6 +188,7 @@ function nameInputDom(show) {
     nameSubmit.hide();
   }
 }
+
 
 // Classes
 class Player {
