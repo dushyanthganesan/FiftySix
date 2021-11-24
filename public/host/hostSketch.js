@@ -23,7 +23,7 @@ function setup() {
 	createCanvas(w, h);
 	pixelDensity(1)  // avoids mobile slowdowns
 
-	// socket
+	// sockets /////////////////////////////////
   socket = io.connect('192.168.1.67:3000');
 	socket.emit("new host", "hello");
 	socket
@@ -41,7 +41,19 @@ function setup() {
 			stage = data;
 		});
 
+///////////////////////////////////////////////
 
+// restart button
+restartButton = createButton("restart game");
+restartButton
+	.id("restartButton")
+	.position(w-80, 30)
+	.mousePressed(() => {
+		socket.emit("restart", "restart");
+	});
+
+
+//initialize cardback images
 	let col;
 	imageMode(CENTER)
 	for (let i = 0; i < numberOfCards; i++) {
@@ -132,6 +144,7 @@ function draw() {
     // end players joining
 
 		case "restart":
+			stage = "wait for players";
 			location.reload();
       break;
 		// end restart

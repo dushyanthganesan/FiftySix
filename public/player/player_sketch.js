@@ -53,7 +53,7 @@ function setup() {
     })
     
     // update stage in state machine
-    .on("stage", (data) => {
+    .on("player stage", (data) => {
       stage = data;
     })
 
@@ -121,9 +121,9 @@ function draw() {
 
         // move cardbacks
         if (cardbackOffet > -500) {
+          nameCard = true;
           cardbackOffet -= 6;
         } else {
-          nameCard = true;
           showCards = false;
         }
       }
@@ -149,6 +149,7 @@ function draw() {
 
 
     case "restart":
+      stage = "name";
       location.reload();
       break;
   }
