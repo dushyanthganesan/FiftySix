@@ -5,9 +5,9 @@ let cardbackImgs = [];
 let col;
 
 function preload() {
-  titleFont = loadFont('resources/fonts/AlfaSlabOne-Regular.ttf');
-  cardbackImgs[0] = loadImage('resources/images/cardback-blue.png');
-  cardbackImgs[1] = loadImage('resources/images/cardback-red.png');
+  titleFont = loadFont("resources/fonts/AlfaSlabOne-Regular.ttf");
+  cardbackImgs[0] = loadImage("resources/images/cardback-blue.png");
+  cardbackImgs[1] = loadImage("resources/images/cardback-red.png");
 }
 
 function setup() {
@@ -15,7 +15,7 @@ function setup() {
   w = windowWidth;
   h = windowHeight;
   createCanvas(w, h);
-  pixelDensity(1)  // avoids mobile slowdowns
+  pixelDensity(1); // avoids mobile slowdowns
 
   if (h > w) {
     phone = true;
@@ -23,7 +23,7 @@ function setup() {
   }
 
   showButtons(phone);
-  imageMode(CENTER)
+  imageMode(CENTER);
 
   for (let i = 0; i < numberOfCards; i++) {
     let x = random(w);
@@ -36,11 +36,12 @@ function setup() {
     } else {
       col = floor(random(0, 2));
     }
-    if (col == 0) {speed = -speed;}
+    if (col == 0) {
+      speed = -speed;
+    }
     cards.push(new Cardback(x, y, width, speed, cardbackImgs[col], h));
   }
-
-}	
+}
 
 function draw() {
   background(255);
@@ -52,38 +53,38 @@ function draw() {
 
   // Fifty Six text
   textFont(titleFont);
-  textAlign(CENTER)
+  textAlign(CENTER);
   textSize(170);
-  fill(color(0))
-  text('Fifty Six', w/2, h/3);
-
+  fill(color(0));
+  text("Fifty Six", w / 2, h / 3);
 }
 
 function buttonMaker(label, posx, posy, buttonw, buttonh) {
   let button = createButton(label);
-  button.position(posx-buttonw/2, posy-buttonh/2);
+  button.position(posx - buttonw / 2, posy - buttonh / 2);
   button.size(buttonw, buttonh);
-  
+
   return button;
 }
 
-function showButtons(phone){
+function showButtons(phone) {
   if (phone) {
-    playerButton = buttonMaker('New Player', w/2, 5*h/8, 500, 100);
-    playerButton.id('playerButton');
-    playerButton.class('fade-in'); 
-    document.getElementById('playerButton').addEventListener('click', (event) => {
-      event.preventDefault();
-      window.location.href = '/player';
-    });
+    playerButton = buttonMaker("New Player", w / 2, (5 * h) / 8, 500, 100);
+    playerButton.id("playerButton");
+    playerButton.class("fade-in");
+    document
+      .getElementById("playerButton")
+      .addEventListener("click", (event) => {
+        event.preventDefault();
+        window.location.href = "/player";
+      });
   } else {
-    hostButton = buttonMaker('New Game', w/2, 5*h/8, 500, 100);
-    hostButton.id('hostButton');
-    hostButton.class('fade-in'); 
-	  document.getElementById('hostButton').addEventListener('click', (event) => {
+    hostButton = buttonMaker("New Game", w / 2, (5 * h) / 8, 500, 100);
+    hostButton.id("hostButton");
+    hostButton.class("fade-in");
+    document.getElementById("hostButton").addEventListener("click", (event) => {
       event.preventDefault();
-      window.location.href = '/host';
+      window.location.href = "/host";
     });
   }
- 
 }

@@ -2,8 +2,8 @@
 let express = require("express");
 let app = express();
 let server = app.listen(3000);
-const Player = require('./Player.js');
-const Host = require('./Host.js');
+const Player = require("./Player.js");
+const Host = require("./Host.js");
 
 app.use(express.static("public"));
 console.log("server running on port 3000");
@@ -13,7 +13,7 @@ let io = socket(server);
 let host = new Host();
 // Rooms:
 //    "host":    all host instances
-//    "players": all player instances 
+//    "players": all player instances
 
 // game vars
 let playerCount = 0;
@@ -21,11 +21,11 @@ let players = new Map();
 let players_vect = [];
 
 let gameStarted = false;
-let colors = ["#976391","#6a994e","#40798c","#e09f3e","#32292f", "#d9594c"];
+let colors = ["#976391", "#6a994e", "#40798c", "#e09f3e", "#32292f", "#d9594c"];
 
 let playerStages = [];
-playerStages[0] = 'name';
-playerStages[1] = 'waiting for players';
+playerStages[0] = "name";
+playerStages[1] = "waiting for players";
 
 let currentHostStage;
 let hostStages = [];
@@ -33,7 +33,7 @@ hostStages[0] = "wait for players";
 hostStages[1] = "players joining";
 
 // Sockets //
-io.sockets.on('connection', node);
+io.sockets.on("connection", node);
 function node(socket) {
   console.log(`new connection [id=${socket.id}]`);
   // NEW HOST //
@@ -44,7 +44,7 @@ function node(socket) {
       socket.emit("update players", host);
       io.to("host").emit("host stage", currentHostStage);
     }
-  })
+  });
 
   socket.on("restart", (data) => {
     console.log("restarting");
@@ -56,7 +56,7 @@ function node(socket) {
   socket.on("new player", (name) => {
     // Check if name has been repeated
     validName = true;
-    players_vect.forEach(p => { 
+    players_vect.forEach((p) => {
       console.log(p);
       if (p == name && !gameStarted) {
         console.log("Identical name for new player not allowed.");
@@ -86,7 +86,6 @@ function node(socket) {
       io.to("host").emit("host stage", currentHostStage);
     }
   });
-
 }
 
 function restart() {
