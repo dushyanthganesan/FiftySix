@@ -22,9 +22,10 @@ function setup() {
   h = windowHeight;
 	createCanvas(w, h);
 	pixelDensity(1)  // avoids mobile slowdowns
+  cfg = loadJSON('../config.json')
 
 	// sockets /////////////////////////////////
-  socket = io.connect('192.168.1.67:3000');
+  socket = io.connect(cfg.socket.host + cfg.socket.port);
 	socket.emit("new host", "hello");
 	socket
 		.on("update players", (data) => {
@@ -152,3 +153,4 @@ function draw() {
 	}
 
 }
+

@@ -1,6 +1,8 @@
+let cfg;
 /////////////////
 /// variables ///
 /////////////////
+
 let socket;  // socket app
 let stage = "name"; // stage variable
 
@@ -20,6 +22,7 @@ let opacity = [200, 1];
 // preload //
 /////////////
 function preload() {
+  cfg = loadJSON('../config.json')
   titleFont = loadFont('../resources/fonts/AlfaSlabOne-Regular.ttf');
   cardbackImgs[0] = loadImage('../resources/images/cardback-blue.png');
 	cardbackImgs[1] = loadImage('../resources/images/cardback-red.png');
@@ -36,7 +39,7 @@ function setup() {
   pixelDensity(1);  // avoids mobile slowdowns
 
   // socket
-  socket = io.connect('192.168.1.67:3000');
+  socket = io.connect(cfg.socket.host + cfg.socket.port);
   
   // update player object
   socket
